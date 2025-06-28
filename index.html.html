@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Happy 1 Month!</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      overflow: hidden;
+      color: #cc6699;
+      text-align: center;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 40px;
+      margin-top: 40px;
+      color: #ff66b2;
+    }
+
+    .flipbook {
+      position: relative;
+      margin: 40px auto;
+      width: 95%;
+      max-width: 700px;
+      background: #ffe0ef url('https://i.imgur.com/dGG4qD8.png') repeat-y left center;
+      padding: 50px 60px 50px 80px;
+      border-radius: 30px;
+      box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 22px;
+      min-height: 300px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .controls {
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      background: #ff99cc;
+      color: white;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    button:hover {
+      background: #ff6fa8;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99cc;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99cc;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        bottom: 0;
+        opacity: 0.7;
+        transform: translateX(0) rotate(45deg);
+      }
+      100% {
+        bottom: 100vh;
+        opacity: 0;
+        transform: translateX(50px) rotate(45deg);
+      }
+    }
+
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy 1st Month 💖</h1>
+
+  <div class="flipbook">
+    <!-- You can edit each "TO BE EDITED" line with your message -->
+    <div class="page active">Page 1: TO BE EDITED</div>
+    <div class="page">Page 2: TO BE EDITED</div>
+    <div class="page">Page 3: TO BE EDITED</div>
+    <div class="page">Page 4: TO BE EDITED</div>
+    <div class="page">Page 5: TO BE EDITED</div>
+    <div class="page">Page 6: TO BE EDITED</div>
+
+    <div class="controls">
+      <button onclick="prevPage()">Previous</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+  </div>
+
+  <!-- Music instructions: Replace the link below with your own MP3 link -->
+  <p style="margin-top:30px;">Now playing: <strong>Your Universe - Rico Blanco</strong></p>
+  <audio controls autoplay loop>
+    <source src="https://example.com/your-universe.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextPage() {
+      currentPage = (currentPage + 1) % pages.length;
+      showPage(currentPage);
+    }
+
+    function prevPage() {
+      currentPage = (currentPage - 1 + pages.length) % pages.length;
+      showPage(currentPage);
+    }
+
+    const messages = [
+      "TO BE EDITED",
+      "TO BE EDITED",
+      "TO BE EDITED",
+      "TO BE EDITED",
+      "TO BE EDITED",
+      "TO BE EDITED"
+    ];
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.title = messages[Math.floor(Math.random() * messages.length)];
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
